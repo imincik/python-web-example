@@ -11,18 +11,17 @@ DB_NAME = os.getenv("DB_NAME", "mydb")
 DB_USER = os.getenv("DB_USER", "myuser")
 DB_PASS = os.getenv("DB_PASS", "mypassword")
 
+
 def get_connection():
     return psycopg2.connect(
-        host=DB_HOST,
-        port=DB_PORT,
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASS
+        host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASS
     )
+
 
 @app.route("/")
 def index():
     return "Hello !"
+
 
 @app.route("/users", methods=["GET"])
 def get_users():
@@ -33,6 +32,7 @@ def get_users():
     cur.close()
     conn.close()
     return jsonify([{"id": r[0], "name": r[1]} for r in rows])
+
 
 @app.route("/users", methods=["POST"])
 def add_user():
@@ -47,8 +47,10 @@ def add_user():
     conn.close()
     return jsonify({"id": user_id, "name": name})
 
+
 def main():
     app.run(host="0.0.0.0", port=5000)
+
 
 if __name__ == "__main__":
     main()
