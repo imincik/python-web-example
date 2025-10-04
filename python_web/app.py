@@ -23,6 +23,17 @@ def index():
     return "Hello !"
 
 
+@app.route("/init", methods=["POST"])
+def init():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name TEXT NOT NULL);")
+    conn.commit()
+    cur.close()
+    conn.close()
+    return jsonify({"success": "true"})
+
+
 @app.route("/users", methods=["GET"])
 def get_users():
     conn = get_connection()
