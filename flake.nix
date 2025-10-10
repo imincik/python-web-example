@@ -1,5 +1,5 @@
 {
-  description = "Flake forge";
+  description = "Example Python web app using Flask and PostgreSQL";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
